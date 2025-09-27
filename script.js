@@ -26,20 +26,24 @@ const artworks = [
         phrase: "Entre tus labios, hallé mi destino."
     }
 ];
-
+// 🎵 Música
 function PlayAudio() {
     document.getElementById("musical").play();
 }
 
+// 📸 Control
 let current = 0;
 const gallery = document.getElementById("gallery");
 const endText = document.getElementById("endText");
 
-// ❤️ Cada clic revela una nueva pintura
+// ❤️ Cada clic muestra una sola pintura (reemplaza la anterior)
 document.body.addEventListener("click", () => {
     if (current >= artworks.length) return;
 
     const art = artworks[current];
+
+    // 🧹 Limpiar galería antes de mostrar la siguiente
+    gallery.innerHTML = "";
 
     // 🎁 Crear bloque de pintura
     const block = document.createElement("div");
@@ -70,7 +74,7 @@ document.body.addEventListener("click", () => {
         block.appendChild(heart);
     }
 
-    // 📌 Agregar al DOM
+    // 📌 Reemplazar contenido en galería
     gallery.appendChild(block);
 
     // 💬 Mensajes personalizados tipo burbuja
