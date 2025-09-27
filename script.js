@@ -28,19 +28,14 @@ const artworks = [
 ];
 
 function PlayAudio() {
-    const audio = document.getElementById("musical");
-    if (audio.paused) {
-        audio.play();
-    }
+    document.getElementById("musical").play();
 }
 
-// 📜 Variables principales
 let current = 0;
-const intro = document.getElementById("intro");
 const gallery = document.getElementById("gallery");
 const endText = document.getElementById("endText");
 
-// 💛 Cada clic revela una nueva pintura
+// ❤️ Cada clic revela una nueva pintura
 document.body.addEventListener("click", () => {
     if (current >= artworks.length) return;
 
@@ -65,7 +60,7 @@ document.body.addEventListener("click", () => {
     block.appendChild(title);
     block.appendChild(phrase);
 
-    // 💖 Corazones flotantes (con alturas aleatorias)
+    // 💖 Corazones flotantes
     for (let side of ["left", "right"]) {
         const heart = document.createElement("span");
         heart.textContent = "💖";
@@ -77,6 +72,19 @@ document.body.addEventListener("click", () => {
 
     // 📌 Agregar al DOM
     gallery.appendChild(block);
+
+    // 💬 Mensajes personalizados tipo burbuja
+    const mensajes = [
+        "💬 Amor, sigue haciendo click ❤️",
+        "💬 Aún hay más para ti ❤️",
+        "💬 Ya falta poco mi amor ❤️",
+        "💬 Ya casi llegas al final ❤️"
+    ];
+
+    if (current < mensajes.length) {
+        showBubbleMessage(mensajes[current]);
+    }
+
     current++;
 
     // 🌙 Mostrar mensaje final
@@ -86,3 +94,21 @@ document.body.addEventListener("click", () => {
         }, 1500);
     }
 });
+
+// ✨ Función para mostrar burbujitas
+function showBubbleMessage(text) {
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble-message");
+    bubble.textContent = text;
+
+    document.body.appendChild(bubble);
+
+    setTimeout(() => {
+        bubble.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        bubble.classList.remove("show");
+        setTimeout(() => bubble.remove(), 500);
+    }, 2500);
+}
